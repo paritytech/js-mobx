@@ -1,0 +1,32 @@
+{
+  "name": "@parity/mobx",
+  "description": "Parity MobX Stores",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "module": "src/index.js",
+  "jsnext:main": "src/index.js",
+  "author": "Parity Team <admin@parity.io>",
+  "maintainers": [
+    "Jaco Greeff",
+    "Nicolas Gotchac",
+    "Craig O'Connor",
+    "Amaury Martiny"
+  ],
+  "contributors": [],
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paritytech/js-mobx.git"
+  },
+  "keywords": [],
+  "scripts": {
+    "build": "babel src --out-dir lib --ignore *.spec.js --copy-files",
+    "ci:makeshift": "makeshift",
+    "lint": "npm run lint:js",
+    "lint:js": "eslint src",
+    "test": "echo \"WARN: npm run test skipped\""
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "peerDependencies": {}
+}
