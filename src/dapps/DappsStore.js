@@ -23,10 +23,14 @@ export default class DappsStore {
   @observable apps = [];
 
   constructor(api) {
+    this._api = api;
+
+    this.loadApps();
+  }
+
+  static get(api) {
     if (!instance) {
-      this._api = api;
-      instance = this;
-      this.loadApps();
+      instance = new DappsStore(api);
     }
 
     return instance;

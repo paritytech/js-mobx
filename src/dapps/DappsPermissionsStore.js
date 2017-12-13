@@ -23,10 +23,14 @@ export default class DappsPermissionsStore {
   @observable permissions = {};
 
   constructor(api) {
+    this._api = api;
+
+    this.loadPermissions();
+  }
+
+  static get(api) {
     if (!instance) {
-      this._api = api;
-      instance = this;
-      this.loadPermissions();
+      instance = new DappsPermissionsStore(api);
     }
 
     return instance;
@@ -48,7 +52,7 @@ export default class DappsPermissionsStore {
 
   removeAppPermission = action((method, appId) => {
     const id = DappsPermissionsStore.getPermissionId(method, appId);
-    return this.savePermissions({ [id]: true });
+    return this.savePermissions({ [id]: false });
   });
 
   hasAppPermission = (method, appId) =>
