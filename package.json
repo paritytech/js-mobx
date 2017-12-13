@@ -34,6 +34,7 @@
     "semistandard": "^11.0.0"
   },
   "dependencies": {
+    "@parity/ledger": "^2.1.2",
     "babel-preset-env": "^1.6.1"
   },
   "peerDependencies": {
