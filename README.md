@@ -4,20 +4,20 @@ Repo for all Mobx stores used across dapps & plugins
 
 ## List of stores
 
-| Store                   | Description                                       |
-| ----------------------- | ------------------------------------------------- |
-| `DappsStore`            | List of all dapps                                 |
-| `DappsDisplayStore`     | Display information of dapps (visibility, pinned) |
-| `DappsPermissionsStore` | Method permissions of dapps                       |
-| `HardwareStore`         | Hardware wallets                                  |
-| `UpgradeParityStore`    | Upgrade Parity node                               |
+| Store                   | Description                                          |
+| ----------------------- | ---------------------------------------------------- |
+| `DappsDisplayStore`     | Display information of dapps (visibility, pinned...) |
+| `DappsPermissionsStore` | Method permissions for dapps                         |
+| `DappsStore`            | List of all dapps with info                          |
+| `HardwareStore`         | Hardware wallets                                     |
+| `SignerStore`           | Signer requests                                      |
 
 # Folder structure
 
-The stores tries to follow the structure described in `./src/methodGroups.js`.
+This repo tries to follow the structure described in `./src/methodGroups.js`.
 
-| Folder in this repo | Method Groups                | Stores                                                         |
-| ------------------- | ---------------------------- | -------------------------------------------------------------- |
-| `accounts`          | `accounts`<br>`accountsEdit` | `HardwareStore`                                                |
-| `dapps`             | `dapps`<br>`dappsEdit`       | `DappsStore`<br>`DappsDisplayStore`<br>`DappsPermissionsStore` |
-| `node`              | `node`<br>`nodeUpgrade`      | `UpgradeParityStore`                                           |
+| Folder      | Method Groups                       | Stores                                                         |
+| ----------- | ----------------------------------- | -------------------------------------------------------------- |
+| `accounts/` | `accounts`<br>`accountsEdit`        | `HardwareStore`                                                |
+| `dapps/`    | `dapps`<br>`dappsEdit`              | `DappsStore`<br>`DappsDisplayStore`<br>`DappsPermissionsStore` |
+| `signer/`   | `signerConfirm`<br>`signerRequests` | `SignerStore`                                                  |
