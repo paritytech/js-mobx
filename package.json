@@ -23,7 +23,7 @@
     "build": "babel src --out-dir lib --ignore *.test.js",
     "ci:makeshift": "makeshift",
     "lint": "semistandard src/",
-    "test": "jest --watch"
+    "test": "jest --watch src"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
