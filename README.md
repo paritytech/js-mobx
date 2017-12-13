@@ -12,8 +12,8 @@ Repo for all Mobx stores used across dapps
 
 # Folder structure
 
-The stores are grouped into folders relative to a method group, as described in `./src/methodGroups.js`.
+The stores tries to follow the structure as described in `./src/methodGroups.js`.
 
-| Folder  | Method Groups        | Stores                                                    |
-| ------- | -------------------- | --------------------------------------------------------- |
-| `dapps` | `dapps`, `dappsEdit` | `DappsStore`, `DappsDisplayStore`,`DappsPermissionsStore` |
+| Folder  | Method Groups        | Stores                                                         |
+| ------- | -------------------- | -------------------------------------------------------------- |
+| `dapps` | `dapps`, `dappsEdit` | `DappsStore`<br>`DappsDisplayStore`<br>`DappsPermissionsStore` |

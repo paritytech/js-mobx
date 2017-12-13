@@ -20,16 +20,17 @@
   },
   "keywords": [],
   "scripts": {
-    "build": "babel src --out-dir lib --ignore *.spec.js --copy-files",
+    "build": "babel src --out-dir lib --ignore *.test.js",
     "ci:makeshift": "makeshift",
-    "lint": "npm run lint:js",
-    "lint:js": "semistandard src",
-    "test": "echo \"WARN: npm run test skipped\""
+    "lint": "semistandard src/",
+    "test": "jest --watch"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-stage-0": "^6.24.1",
+    "jest": "^21.2.1",
+    "mobx": "^3.4.1",
     "semistandard": "^11.0.0"
   },
   "dependencies": {
