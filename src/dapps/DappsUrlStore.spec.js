@@ -16,7 +16,7 @@
 
 /* eslint-env jest */
 
-import DappsUrlStore from '../DappsUrlStore';
+import DappsUrlStore from './DappsUrlStore';
 
 const mockUrl = 'http://127.0.0.1:1234';
 
