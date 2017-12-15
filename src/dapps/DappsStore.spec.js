@@ -16,7 +16,7 @@
 
 /* eslint-env jest */
 
-import DappsStore from '../DappsStore';
+import DappsStore from './DappsStore';
 
 const mockApps = [
   { id: '123', name: '123' },

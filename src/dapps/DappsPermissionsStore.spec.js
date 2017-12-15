@@ -16,7 +16,7 @@
 
 /* eslint-env jest */
 
-import DappsPermissionsStore from '../DappsPermissionsStore';
+import DappsPermissionsStore from './DappsPermissionsStore';
 
 const mockPermissions = { 'shell_loadApp:123': true };
 
