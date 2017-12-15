@@ -9,6 +9,7 @@ Repo for all Mobx stores used across dapps & plugins
 | DappsDisplayStore     | Display information of dapps (visibility, pinned...) |
 | DappsPermissionsStore | Method permissions for dapps                         |
 | DappsStore            | List of all dapps with info                          |
+| DappsUrlStore         | Base url of dapps                                    |
 | HardwareStore         | Hardware wallets                                     |
 | SignerStore           | Signer requests                                      |
 
@@ -16,8 +17,8 @@ Repo for all Mobx stores used across dapps & plugins
 
 This repo tries to follow the structure described in `./src/methodGroups.js`.
 
-| Folder    | Method Groups                   | Stores                                                   |
-| --------- | ------------------------------- | -------------------------------------------------------- |
-| accounts/ | accounts<br>accountsEdit        | HardwareStore                                            |
-| dapps/    | dapps<br>dappsEdit              | DappsStore<br>DappsDisplayStore<br>DappsPermissionsStore |
-| signer/   | signerConfirm<br>signerRequests | SignerStore                                              |
+| Folder    | Method Groups                   | Stores                                                                 |
+| --------- | ------------------------------- | ---------------------------------------------------------------------- |
+| accounts/ | accounts<br>accountsEdit        | HardwareStore                                                          |
+| dapps/    | dapps<br>dappsEdit              | DappsDisplayStore, DappsPermissionsStore,<br>DappsStore, DappsUrlStore |
+| signer/   | signerConfirm<br>signerRequests | SignerStore                                                            |
