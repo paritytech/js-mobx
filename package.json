@@ -18,7 +18,10 @@
     "type": "git",
     "url": "git+https://github.com/paritytech/js-mobx.git"
   },
-  "keywords": ["Parity", "MobX"],
+  "keywords": [
+    "Parity",
+    "MobX"
+  ],
   "engines": {
     "node": ">=6.11.5"
   },
@@ -36,6 +39,7 @@
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-stage-0": "^6.24.1",
     "jest": "^21.2.1",
+    "makeshift": "^1.1.0",
     "mobx": "^3.4.1",
     "semistandard": "^11.0.0"
   },
