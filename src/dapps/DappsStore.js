@@ -36,9 +36,10 @@ export default class DappsStore {
     return instance;
   }
 
-  setApps = action(apps => {
+  @action
+  setApps = apps => {
     this.apps = apps;
-  });
+  };
 
   loadApps = () => this._api.shell.getApps(false).then(this.setApps);
 }

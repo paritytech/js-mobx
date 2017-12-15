@@ -41,19 +41,20 @@ export default class DappsPermissionsStore {
    */
   static getPermissionId = (method, appId) => `${method}:${appId}`;
 
+  @action
   setPermissions = permissions => {
     this.permissions = permissions;
   };
 
-  addAppPermission = action((method, appId) => {
+  addAppPermission = (method, appId) => {
     const id = DappsPermissionsStore.getPermissionId(method, appId);
     return this.savePermissions({ [id]: true });
-  });
+  };
 
-  removeAppPermission = action((method, appId) => {
+  removeAppPermission = (method, appId) => {
     const id = DappsPermissionsStore.getPermissionId(method, appId);
     return this.savePermissions({ [id]: false });
-  });
+  };
 
   hasAppPermission = (method, appId) =>
     !!this.permissions[DappsPermissionsStore.getPermissionId(method, appId)];
