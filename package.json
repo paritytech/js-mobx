@@ -18,12 +18,18 @@
     "type": "git",
     "url": "git+https://github.com/paritytech/js-mobx.git"
   },
-  "keywords": [],
+  "keywords": ["Parity", "MobX"],
+  "engines": {
+    "node": ">=6.11.5"
+  },
   "scripts": {
-    "build": "babel src --out-dir lib --ignore *.test.js",
+    "build": "babel src --out-dir lib --ignore *.spec.js",
     "ci:makeshift": "makeshift",
     "lint": "semistandard src/",
-    "test": "jest --watch src"
+    "test": "jest src"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
