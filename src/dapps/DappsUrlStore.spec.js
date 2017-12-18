@@ -40,6 +40,14 @@ test('should handle setUrl', () => {
   expect(store.dappsUrl).toBe(mockUrl);
 });
 
+test('should handle setUrl when url does not start with http://', () => {
+  const store = new DappsUrlStore(mockApi);
+  const partialUrl = '127.0.0.1:1234';
+  store.setUrl(partialUrl);
+
+  expect(store.dappsUrl).toBe(mockUrl);
+});
+
 test('should make api call when loadUrl', () => {
   const dappsUrl = jest.fn(() => Promise.resolve(mockUrl));
   const store = new DappsUrlStore({ parity: { dappsUrl } });
