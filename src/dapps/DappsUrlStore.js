@@ -39,7 +39,9 @@ export default class DappsUrlStore {
   @action
   setUrl = url => {
     if (!url) return;
-    this.dappsUrl = url.includes('//') ? url : `http://${url}`;
+    this.dappsUrl = url.includes('//')
+      ? url
+      : `${window.location.protocol}//${url}`;
   };
 
   loadUrl = () => this._api.parity.dappsUrl().then(this.setUrl);
