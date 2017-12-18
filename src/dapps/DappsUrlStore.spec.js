@@ -43,6 +43,12 @@ test('should handle setUrl', () => {
 test('should handle setUrl when url does not start with http://', () => {
   const store = new DappsUrlStore(mockApi);
   const partialUrl = '127.0.0.1:1234';
+  // Manually define window.location.protocol to http:
+  // https://github.com/facebook/jest/issues/890#issuecomment-209698782
+  Object.defineProperty(window.location, 'protocol', {
+    writable: true,
+    value: 'http:'
+  });
   store.setUrl(partialUrl);
 
   expect(store.dappsUrl).toBe(mockUrl);
