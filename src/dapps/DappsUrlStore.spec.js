@@ -42,13 +42,6 @@ test('should handle setUrl', () => {
   expect(store.dappsUrl).toBe(mockUrl);
 });
 
-test('should handle setError', () => {
-  const store = new DappsUrlStore(mockApi);
-  store.setError({ message: 'SOME_ERROR' });
-
-  expect(store.error).toEqual({ message: 'SOME_ERROR' });
-});
-
 test('should handle setUrl when url does not start with http://', () => {
   const store = new DappsUrlStore(mockApi);
   const partialUrl = '127.0.0.1:1234';
