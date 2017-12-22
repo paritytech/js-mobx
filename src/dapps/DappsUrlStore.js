@@ -21,11 +21,16 @@ let instance = null;
 
 export default class DappsUrlStore {
   @observable dappsUrl;
+  @observable error = null;
 
   constructor(api) {
     this._api = api;
 
-    this.loadUrl();
+    // Subscribe to Parity pubsub for dappsUrl
+    this._api.pubsub.parity.dappsUrl((error, result) => {
+      this.setError(error);
+      this.setUrl(result);
+    });
   }
 
   static get(api) {
@@ -44,5 +49,8 @@ export default class DappsUrlStore {
       : `${window.location.protocol}//${url}`;
   };
 
-  loadUrl = () => this._api.parity.dappsUrl().then(this.setUrl);
+  @action
+  setError = error => {
+    this.error = error;
+  };
 }
