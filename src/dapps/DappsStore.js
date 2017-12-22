@@ -21,6 +21,7 @@ let instance = null;
 
 export default class DappsStore {
   @observable apps = [];
+  @observable error = null;
 
   constructor(api) {
     this._api = api;
@@ -41,5 +42,14 @@ export default class DappsStore {
     this.apps = apps;
   };
 
-  loadApps = () => this._api.shell.getApps(false).then(this.setApps);
+  @action
+  setError = error => {
+    this.error = error;
+  };
+
+  loadApps = () =>
+    this._api.shell
+      .getApps(false)
+      .then(this.setApps)
+      .catch(this.setError);
 }

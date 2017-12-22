@@ -21,6 +21,7 @@ let instance = null;
 
 export default class DappsPermissionsStore {
   @observable permissions = {};
+  @observable error = null;
 
   constructor(api) {
     this._api = api;
@@ -46,6 +47,11 @@ export default class DappsPermissionsStore {
     this.permissions = permissions;
   };
 
+  @action
+  setError = error => {
+    this.error = error;
+  };
+
   addAppPermission = (method, appId) => {
     const id = DappsPermissionsStore.getPermissionId(method, appId);
     return this.savePermissions({ [id]: true });
@@ -63,12 +69,15 @@ export default class DappsPermissionsStore {
     this._api.shell.getMethodPermissions().then(this.setPermissions);
 
   savePermissions = permissions =>
-    this._api.shell.setMethodPermissions(permissions).then(
-      // Load all permissions again after saving. It's overkill, as most of the
-      // time only the recently toggled permission will differ. However,
-      // it may happen the there's a shell_setMethodPermissions request for
-      // dapp-dapp-methods, which will not be taken into account if we only
-      // toggled this.permissions[permissionId].
-      this.loadPermissions
-    );
+    this._api.shell
+      .setMethodPermissions(permissions)
+      .then(
+        // Load all permissions again after saving. It's overkill, as most of the
+        // time only the recently toggled permission will differ. However,
+        // it may happen the there's a shell_setMethodPermissions request for
+        // dapp-dapp-methods, which will not be taken into account if we only
+        // toggled this.permissions[permissionId].
+        this.loadPermissions
+      )
+      .catch(this.setError);
 }

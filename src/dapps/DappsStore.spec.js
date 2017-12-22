@@ -47,6 +47,13 @@ test('should handle setApps', () => {
   expect(store.apps).toContainEqual(mockApps[2]);
 });
 
+test('should handle setError', () => {
+  const store = new DappsStore(mockApi);
+  store.setError({ message: 'SOME_ERROR' });
+
+  expect(store.error).toEqual({ message: 'SOME_ERROR' });
+});
+
 test('should make api call when loadApps', () => {
   const getApps = jest.fn(() => Promise.resolve(mockApps));
   const store = new DappsStore({ shell: { getApps } });

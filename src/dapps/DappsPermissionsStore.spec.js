@@ -41,6 +41,13 @@ test('should handle setPermissions', () => {
   expect(store.permissions).toEqual(mockPermissions);
 });
 
+test('should handle setError', () => {
+  const store = new DappsPermissionsStore(mockApi);
+  store.setError({ message: 'SOME_ERROR' });
+
+  expect(store.error).toEqual({ message: 'SOME_ERROR' });
+});
+
 test('should handle hasAppPermission', () => {
   const store = new DappsPermissionsStore(mockApi);
 
