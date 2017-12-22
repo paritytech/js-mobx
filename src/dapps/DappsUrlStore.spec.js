@@ -19,10 +19,12 @@
 import DappsUrlStore from './DappsUrlStore';
 
 const mockUrl = 'http://127.0.0.1:1234';
-
+const mockError = { message: 'SOME_ERROR' };
 const mockApi = {
-  parity: {
-    dappsUrl: () => Promise.resolve()
+  pubsub: {
+    parity: {
+      dappsUrl: () => {}
+    }
   }
 };
 
@@ -40,13 +42,6 @@ test('should handle setUrl', () => {
   expect(store.dappsUrl).toBe(mockUrl);
 });
 
-test('should handle setError', () => {
-  const store = new DappsUrlStore(mockApi);
-  store.setError({ message: 'SOME_ERROR' });
-
-  expect(store.error).toEqual({ message: 'SOME_ERROR' });
-});
-
 test('should handle setUrl when url does not start with http://', () => {
   const store = new DappsUrlStore(mockApi);
   const partialUrl = '127.0.0.1:1234';
@@ -61,13 +56,41 @@ test('should handle setUrl when url does not start with http://', () => {
   expect(store.dappsUrl).toBe(mockUrl);
 });
 
-test('should make api call when loadUrl', () => {
-  const dappsUrl = jest.fn(() => Promise.resolve(mockUrl));
-  const store = new DappsUrlStore({ parity: { dappsUrl } });
+test('should handle setError', () => {
+  const store = new DappsUrlStore(mockApi);
+  store.setError(mockError);
 
-  expect.assertions(2);
-  return store.loadUrl().then(() => {
-    expect(dappsUrl).toHaveBeenCalled();
+  expect(store.error).toEqual(mockError);
+});
+
+test('should set url when pubsub publishes', () => {
+  const mockPubSub = callback => {
+    setTimeout(() => callback(null, mockUrl), 200); // Simulate pubsub with a 200ms timeout
+  };
+  const store = new DappsUrlStore({
+    pubsub: {
+      parity: { dappsUrl: mockPubSub }
+    }
+  });
+
+  expect.assertions(1);
+  return new Promise(resolve => setTimeout(resolve, 200)).then(() => {
     expect(store.dappsUrl).toBe(mockUrl);
+  });
+});
+
+test('should set error when pubsub throws error', () => {
+  const mockPubSub = callback => {
+    setTimeout(() => callback(mockError, null), 200); // Simulate pubsub with a 200ms timeout
+  };
+  const store = new DappsUrlStore({
+    pubsub: {
+      parity: { dappsUrl: mockPubSub }
+    }
+  });
+
+  expect.assertions(1);
+  return new Promise(resolve => setTimeout(resolve, 200)).then(() => {
+    expect(store.error).toEqual(mockError);
   });
 });
