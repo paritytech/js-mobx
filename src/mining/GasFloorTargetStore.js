@@ -14,18 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import methodGroups, {
-  allMethods,
-  methodGroupFromMethod
-} from './methodGroups';
+import { extendObservable } from 'mobx';
 
-export { methodGroups, allMethods, methodGroupFromMethod };
+import createMobxStore from '../utils/createMobxStore';
 
-export * from './accounts';
-export * from './dapps';
-export * from './eth';
-export * from './mining';
-export * from './network';
-export * from './node';
-export * from './other';
-export * from './signer';
+const instance = createMobxStore('parity_gasFloorTarget');
+
+extendObservable(instance, {
+  /**
+   * Seve gas floor target
+   */
+  saveGasFloorTarget: function(gasFloorTarget) {
+    return this._api.parity.setGasFloorTarget(gasFloorTarget);
+  }
+});
+
+export default instance;
