@@ -3,8 +3,8 @@
   "description": "Parity MobX Stores",
   "version": "1.0.4",
   "main": "lib/index.js",
-  "module": "src/index.js",
-  "jsnext:main": "src/index.js",
+  "module": "lib/index.js",
+  "jsnext:main": "lib/index.js",
   "author": "Parity Team <admin@parity.io>",
   "maintainers": [
     "Jaco Greeff",
@@ -18,17 +18,16 @@
     "type": "git",
     "url": "git+https://github.com/paritytech/js-mobx.git"
   },
-  "keywords": [
-    "Parity",
-    "MobX"
-  ],
+  "keywords": ["Parity", "MobX"],
   "engines": {
     "node": ">=6.11.5"
   },
   "scripts": {
     "build": "babel src --out-dir lib --ignore *.spec.js",
+    "clean": "rimraf lib",
     "ci:makeshift": "makeshift",
     "lint": "semistandard src/",
+    "prebuild": "npm run clean",
     "test": "jest src"
   },
   "publishConfig": {
@@ -41,6 +40,7 @@
     "jest": "^21.2.1",
     "makeshift": "^1.1.0",
     "mobx": "^3.4.1",
+    "rimraf": "^2.6.2",
     "semistandard": "^11.0.0"
   },
   "dependencies": {
