@@ -16,8 +16,6 @@
 
 /* eslint-env jest */
 
-import { toJS } from 'mobx';
-
 import NodeHealthStore, {
   STATUS_BAD,
   STATUS_OK,
@@ -29,7 +27,6 @@ const mockHealth = {
   sync: { details: true, message: 'not synced', status: STATUS_WARN },
   time: { details: 234, message: 'bad', status: STATUS_BAD }
 };
-const mockError = { message: 'SOME_ERROR' };
 const mockApi = {
   pubsub: {
     parity: {

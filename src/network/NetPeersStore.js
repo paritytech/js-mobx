@@ -26,7 +26,7 @@ extendObservable(instance, {
   /**
    * Get real network peers
    */
-  get realPeers() {
+  get realPeers () {
     if (!this.netPeers.peers) return [];
     return this.netPeers.peers
       .filter(({ id }) => id)
@@ -42,28 +42,28 @@ extendObservable(instance, {
   /**
    * Accept non-reserved peers
    */
-  acceptNonReservedPeers: function() {
+  acceptNonReservedPeers: function () {
     return this._api.parity.acceptNonReservedPeers();
   },
 
   /**
    * Add reserved peers
    */
-  addReservedPeer: function(enode) {
+  addReservedPeer: function (enode) {
     return this._api.parity.addReservedPeer(enode);
   },
 
   /**
    * Drop non-reserved peers
    */
-  dropNonReservedPeers: function() {
+  dropNonReservedPeers: function () {
     return this._api.parity.dropNonReservedPeers();
   },
 
   /**
    * Remove reserved peers
    */
-  removeReservedPeer: function(enode) {
+  removeReservedPeer: function (enode) {
     return this._api.parity.removeReservedPeer(enode);
   }
 });

@@ -23,13 +23,13 @@ export default class DappsPermissionsStore {
   @observable permissions = {};
   @observable error = null;
 
-  constructor(api) {
+  constructor (api) {
     this._api = api;
 
     this.loadPermissions();
   }
 
-  static get(api) {
+  static get (api) {
     if (!instance) {
       instance = new DappsPermissionsStore(api);
     }

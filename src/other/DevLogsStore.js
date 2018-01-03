@@ -23,7 +23,7 @@ export default class DevLogsStore {
   @observable error = null;
   @observable parsedLogs = [];
 
-  constructor(api) {
+  constructor (api) {
     this._api = api;
 
     this._api.pubsub.parity.devLogs((error, devLogs) => {
@@ -33,7 +33,7 @@ export default class DevLogsStore {
     });
   }
 
-  static get(api) {
+  static get (api) {
     if (!instance) {
       instance = new DevLogsStore(api);
     }

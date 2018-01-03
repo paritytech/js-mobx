@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import { computed, extendObservable } from 'mobx';
+import { extendObservable } from 'mobx';
 
 import createMobxStore from '../utils/createMobxStore';
 
@@ -31,7 +31,7 @@ extendObservable(instance, {
   /**
    * Get overall health of node
    */
-  get overall() {
+  get overall () {
     if (!this.health || !Object.keys(this.health).length) {
       return {
         status: STATUS_BAD,

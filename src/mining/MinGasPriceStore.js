@@ -24,7 +24,7 @@ extendObservable(instance, {
   /**
    * Set minimum gas price
    */
-  saveMinGasPrice: function(minGasPrice) {
+  saveMinGasPrice: function (minGasPrice) {
     return this._api.parity.setMinGasPrice(minGasPrice);
   }
 });

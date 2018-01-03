@@ -24,7 +24,7 @@ extendObservable(instance, {
   /**
    * Save extra data
    */
-  saveExtraData: function(extraData) {
+  saveExtraData: function (extraData) {
     return this._api.parity.setExtraData(extraData);
   }
 });

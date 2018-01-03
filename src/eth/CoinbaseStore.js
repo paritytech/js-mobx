@@ -24,7 +24,7 @@ extendObservable(instance, {
   /**
    * Set author
    */
-  setAuthor: function(author) {
+  setAuthor: function (author) {
     return this._api.parity.setAuthor(author);
   }
 });

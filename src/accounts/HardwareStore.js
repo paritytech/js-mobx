@@ -26,7 +26,7 @@ export default class HardwareStore {
   @observable wallets = {};
   @observable pinMatrixRequest = [];
 
-  constructor(api) {
+  constructor (api) {
     this._api = api;
     this._ledger = Ledger.create(api);
     this._pollId = null;
@@ -40,7 +40,7 @@ export default class HardwareStore {
     });
   }
 
-  isConnected(address) {
+  isConnected (address) {
     return computed(() => !!this.wallets[address]).get();
   }
 
@@ -65,7 +65,7 @@ export default class HardwareStore {
     }, HW_SCAN_INTERVAL);
   };
 
-  scanTrezor() {
+  scanTrezor () {
     return this._api.parity
       .lockedHardwareAccountsInfo()
       .then(paths => {
@@ -82,7 +82,7 @@ export default class HardwareStore {
       });
   }
 
-  scanLedger() {
+  scanLedger () {
     if (!this._ledger.isSupported) {
       return Promise.resolve({});
     }
@@ -109,7 +109,7 @@ export default class HardwareStore {
       });
   }
 
-  _subscribeParity() {
+  _subscribeParity () {
     const onError = error => {
       console.warn('HardwareStore::scanParity', error);
 
@@ -135,7 +135,7 @@ export default class HardwareStore {
       .catch(onError);
   }
 
-  scan() {
+  scan () {
     this.setScanning(true);
     // This only scans for locked devices and does not return open devices,
     // so no need to actually wait for any results here.
@@ -154,11 +154,11 @@ export default class HardwareStore {
     });
   }
 
-  updateWallets() {
+  updateWallets () {
     this.setWallets(Object.assign({}, this.hwAccounts, this.ledgerAccounts));
   }
 
-  createAccountInfo(entry, original = {}) {
+  createAccountInfo (entry, original = {}) {
     const { address, manufacturer, name } = entry;
 
     return Promise.all([
@@ -185,11 +185,11 @@ export default class HardwareStore {
     });
   }
 
-  signLedger(transaction) {
+  signLedger (transaction) {
     return this._ledger.signTransaction(transaction);
   }
 
-  pinMatrixAck(device, passcode) {
+  pinMatrixAck (device, passcode) {
     return this._api.parity
       .hardwarePinMatrixAck(device.path, passcode)
       .then(success => {
@@ -198,7 +198,7 @@ export default class HardwareStore {
       });
   }
 
-  static get(api) {
+  static get (api) {
     if (!instance) {
       instance = new HardwareStore(api);
     }

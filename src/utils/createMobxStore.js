@@ -41,14 +41,14 @@ const createMobxStore = (jsonRpcMethod, storeOptions = {}) => {
      * Action setter for the main variable of the store
      * E.g. in NodeHealthStore, this would be @action setHealth()
      */
-    [`set${capitalize(options.variableName)}`]: action(function(result) {
+    [`set${capitalize(options.variableName)}`]: action(function (result) {
       this[options.variableName] = result;
     }),
 
     /**
      * Action setter for the error
      */
-    setError: action(function(error) {
+    setError: action(function (error) {
       this.error = error;
     }),
 
@@ -56,7 +56,7 @@ const createMobxStore = (jsonRpcMethod, storeOptions = {}) => {
      * The public getter to access the Mobx store
      * @param {Object} api The @parity/api object
      */
-    get(api) {
+    get (api) {
       if (!this[options.variableName]) {
         // We are enforcing Mobx stores to be singletons. If we didn't populate
         // the current store with the main variable, then it's the 1st time the

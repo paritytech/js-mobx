@@ -23,7 +23,7 @@ export default class DappsUrlStore {
   @observable dappsUrl;
   @observable error = null;
 
-  constructor(api) {
+  constructor (api) {
     this._api = api;
 
     // Subscribe to Parity pubsub for dappsUrl
@@ -33,7 +33,7 @@ export default class DappsUrlStore {
     });
   }
 
-  static get(api) {
+  static get (api) {
     if (!instance) {
       instance = new DappsUrlStore(api);
     }

@@ -23,13 +23,13 @@ export default class DappsStore {
   @observable apps = [];
   @observable error = null;
 
-  constructor(api) {
+  constructor (api) {
     this._api = api;
 
     this.loadApps();
   }
 
-  static get(api) {
+  static get (api) {
     if (!instance) {
       instance = new DappsStore(api);
     }

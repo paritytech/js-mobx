@@ -24,7 +24,7 @@ extendObservable(instance, {
   /**
    * Seve gas floor target
    */
-  saveGasFloorTarget: function(gasFloorTarget) {
+  saveGasFloorTarget: function (gasFloorTarget) {
     return this._api.parity.setGasFloorTarget(gasFloorTarget);
   }
 });
