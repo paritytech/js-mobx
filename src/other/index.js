@@ -14,18 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import methodGroups, {
-  allMethods,
-  methodGroupFromMethod
-} from './methodGroups';
-
-export { methodGroups, allMethods, methodGroupFromMethod };
-
-export * from './accounts';
-export * from './dapps';
-export * from './eth';
-export * from './mining';
-export * from './network';
-export * from './node';
-export * from './other';
-export * from './signer';
+export { default as DevLogsLevelsStore } from './DevLogsLevelsStore';
+export { default as DevLogsStore } from './DevLogsStore';
+export { default as LatestBlockStore } from './LatestBlockStore';

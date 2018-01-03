@@ -16,8 +16,6 @@
 
 /* eslint-env jest */
 
-import { toJS } from 'mobx';
-
 import NodeHealthStore, {
   STATUS_BAD,
   STATUS_OK,
@@ -29,7 +27,6 @@ const mockHealth = {
   sync: { details: true, message: 'not synced', status: STATUS_WARN },
   time: { details: 234, message: 'bad', status: STATUS_BAD }
 };
-const mockError = { message: 'SOME_ERROR' };
 const mockApi = {
   pubsub: {
     parity: {
@@ -38,29 +35,8 @@ const mockApi = {
   }
 };
 
-test('should be a singleton store when using static get', () => {
-  const store1 = NodeHealthStore.get(mockApi);
-  const store2 = NodeHealthStore.get(mockApi);
-
-  expect(store1).toBe(store2);
-});
-
-test('should handle setHealth', () => {
-  const store = new NodeHealthStore(mockApi);
-  store.setHealth(mockHealth);
-
-  expect(toJS(store.health)).toEqual(mockHealth);
-});
-
-test('should handle setError', () => {
-  const store = new NodeHealthStore(mockApi);
-  store.setError(mockError);
-
-  expect(store.error).toEqual(mockError);
-});
-
 test('should handle overall without health', () => {
-  const store = new NodeHealthStore(mockApi);
+  const store = NodeHealthStore.get(mockApi);
   store.setHealth({});
 
   expect(store.overall).toEqual({
@@ -70,14 +46,14 @@ test('should handle overall without health', () => {
 });
 
 test('should handle overall bad', () => {
-  const store = new NodeHealthStore(mockApi);
+  const store = NodeHealthStore.get(mockApi);
   store.setHealth({ time: mockHealth.time });
 
   expect(store.overall).toEqual({ status: STATUS_BAD, message: ['bad'] });
 });
 
 test('should handle overall needsAttention', () => {
-  const store = new NodeHealthStore(mockApi);
+  const store = NodeHealthStore.get(mockApi);
   store.setHealth({ sync: mockHealth.sync });
 
   expect(store.overall).toEqual({
@@ -87,40 +63,8 @@ test('should handle overall needsAttention', () => {
 });
 
 test('should handle overall ok', () => {
-  const store = new NodeHealthStore(mockApi);
+  const store = NodeHealthStore.get(mockApi);
   store.setHealth({ peers: mockHealth.peers });
 
   expect(store.overall).toEqual({ status: STATUS_OK, message: [] });
-});
-
-test('should set url when pubsub publishes', () => {
-  const mockPubSub = callback => {
-    setTimeout(() => callback(null, mockHealth), 200); // Simulate pubsub with a 200ms timeout
-  };
-  const store = new NodeHealthStore({
-    pubsub: {
-      parity: { nodeHealth: mockPubSub }
-    }
-  });
-
-  expect.assertions(1);
-  return new Promise(resolve => setTimeout(resolve, 200)).then(() => {
-    expect(toJS(store.health)).toEqual(mockHealth);
-  });
-});
-
-test('should set error when pubsub throws error', () => {
-  const mockPubSub = callback => {
-    setTimeout(() => callback(mockError, null), 200); // Simulate pubsub with a 200ms timeout
-  };
-  const store = new NodeHealthStore({
-    pubsub: {
-      parity: { nodeHealth: mockPubSub }
-    }
-  });
-
-  expect.assertions(1);
-  return new Promise(resolve => setTimeout(resolve, 200)).then(() => {
-    expect(store.error).toEqual(mockError);
-  });
 });

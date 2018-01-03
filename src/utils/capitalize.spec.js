@@ -14,18 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import methodGroups, {
-  allMethods,
-  methodGroupFromMethod
-} from './methodGroups';
+/* eslint-env jest */
 
-export { methodGroups, allMethods, methodGroupFromMethod };
+import capitalize from './capitalize';
 
-export * from './accounts';
-export * from './dapps';
-export * from './eth';
-export * from './mining';
-export * from './network';
-export * from './node';
-export * from './other';
-export * from './signer';
+test('should capitalize correctly', () => {
+  expect(capitalize('foo')).toBe('Foo');
+});
+
+test('should leave it if already capitalized', () => {
+  expect(capitalize('BAR')).toBe('BAR');
+});

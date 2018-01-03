@@ -14,38 +14,24 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import { action, computed, observable } from 'mobx';
+import { extendObservable } from 'mobx';
 
-let instance = null;
+import createMobxStore from '../utils/createMobxStore';
 
 export const STATUS_OK = 'ok';
 export const STATUS_WARN = 'needsAttention';
 export const STATUS_BAD = 'bad';
 
-export default class Store {
-  @observable health = {};
-  @observable error;
+const instance = createMobxStore('parity_nodeHealth', {
+  variableName: 'health',
+  defaultValue: {}
+});
 
-  constructor(api) {
-    this._api = api;
-
-    // Subscribe to Parity pubsub for nodeHealth
-    this._api.pubsub.parity.nodeHealth((error, result) => {
-      this.setError(error);
-      this.setHealth(result);
-    });
-  }
-
-  static get(api) {
-    if (!instance) {
-      instance = new Store(api);
-    }
-
-    return instance;
-  }
-
-  @computed
-  get overall() {
+extendObservable(instance, {
+  /**
+   * Get overall health of node
+   */
+  get overall () {
     if (!this.health || !Object.keys(this.health).length) {
       return {
         status: STATUS_BAD,
@@ -75,14 +61,6 @@ export default class Store {
       message
     };
   }
+});
 
-  @action
-  setHealth = health => {
-    this.health = health;
-  };
-
-  @action
-  setError = error => {
-    this.error = error;
-  };
-}
+export default instance;

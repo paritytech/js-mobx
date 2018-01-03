@@ -3,8 +3,8 @@
   "description": "Parity MobX Stores",
   "version": "1.0.4",
   "main": "lib/index.js",
-  "module": "src/index.js",
-  "jsnext:main": "src/index.js",
+  "module": "lib/index.js",
+  "jsnext:main": "lib/index.js",
   "author": "Parity Team <admin@parity.io>",
   "maintainers": [
     "Jaco Greeff",
@@ -27,8 +27,10 @@
   },
   "scripts": {
     "build": "babel src --out-dir lib --ignore *.spec.js",
+    "clean": "rimraf lib",
     "ci:makeshift": "makeshift",
-    "lint": "semistandard src/",
+    "lint": "semistandard --parser babel-eslint src/**/*.js",
+    "prebuild": "npm run clean",
     "test": "jest src"
   },
   "publishConfig": {
@@ -36,16 +38,18 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.1.2",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-stage-0": "^6.24.1",
     "jest": "^21.2.1",
     "makeshift": "^1.1.0",
     "mobx": "^3.4.1",
-    "semistandard": "^11.0.0"
+    "rimraf": "^2.6.2",
+    "semistandard": "^12.0.0"
   },
   "dependencies": {
-    "@parity/ledger": "^2.1.2",
-    "babel-preset-env": "^1.6.1"
+    "@parity/ledger": "^2.1.2"
   },
   "peerDependencies": {
     "mobx": "^3.4.1"

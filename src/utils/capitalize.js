@@ -14,18 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import methodGroups, {
-  allMethods,
-  methodGroupFromMethod
-} from './methodGroups';
+/**
+ * Capitalize the first letter of a string
+ * @param {String} str The string to work on
+ */
+const capitalize = str => str.charAt(0).toUpperCase() + str.substring(1);
 
-export { methodGroups, allMethods, methodGroupFromMethod };
-
-export * from './accounts';
-export * from './dapps';
-export * from './eth';
-export * from './mining';
-export * from './network';
-export * from './node';
-export * from './other';
-export * from './signer';
+export default capitalize;

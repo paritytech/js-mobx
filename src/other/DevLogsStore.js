@@ -16,37 +16,46 @@
 
 import { action, observable } from 'mobx';
 
-// Setting up block level variable to enforce singleton store
 let instance = null;
 
-export default class DappsUrlStore {
-  @observable dappsUrl;
+export default class DevLogsStore {
+  @observable devLogs = [];
   @observable error = null;
+  @observable parsedLogs = [];
 
   constructor (api) {
     this._api = api;
 
-    // Subscribe to Parity pubsub for dappsUrl
-    this._api.pubsub.parity.dappsUrl((error, result) => {
+    this._api.pubsub.parity.devLogs((error, devLogs) => {
       this.setError(error);
-      this.setUrl(result);
+      this.setDevLogs(devLogs); // Gets last 128 logs, unparsed
+      this.addParsedLog(devLogs[0]); // Parse the most recent one, not using @computed to avoid parsing too much data
     });
   }
 
   static get (api) {
     if (!instance) {
-      instance = new DappsUrlStore(api);
+      instance = new DevLogsStore(api);
     }
 
     return instance;
   }
 
   @action
-  setUrl = url => {
-    if (!url) return;
-    this.dappsUrl = url.includes('//')
-      ? url
-      : `${window.location.protocol}//${url}`;
+  addParsedLog = log => {
+    const parsedLog = /^(\d{4}.\d{2}.\d{2}.\d{2}.\d{2}.\d{2})(.*)$/i.exec(log); // Get the date inside the log
+    if (!parsedLog) return;
+    this.parsedLogs.replace(
+      this.parsedLogs.concat({
+        date: parsedLog[1],
+        log: parsedLog[2]
+      })
+    );
+  };
+
+  @action
+  setDevLogs = devLogs => {
+    this.devLogs = devLogs;
   };
 
   @action

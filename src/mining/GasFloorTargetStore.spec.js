@@ -14,18 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import methodGroups, {
-  allMethods,
-  methodGroupFromMethod
-} from './methodGroups';
+/* eslint-env jest */
 
-export { methodGroups, allMethods, methodGroupFromMethod };
+import GasFloorTargetStore from './GasFloorTargetStore';
 
-export * from './accounts';
-export * from './dapps';
-export * from './eth';
-export * from './mining';
-export * from './network';
-export * from './node';
-export * from './other';
-export * from './signer';
+test('should handle saveGasFloorTarget', () => {
+  const paritySetGasFloorTarget = jest.fn();
+  const store = GasFloorTargetStore.get({
+    parity: {
+      setGasFloorTarget: paritySetGasFloorTarget
+    },
+    pubsub: {
+      parity: { gasFloorTarget: () => {} }
+    }
+  });
+  store.saveGasFloorTarget('Foo');
+
+  expect(paritySetGasFloorTarget).toHaveBeenCalledWith('Foo');
+});

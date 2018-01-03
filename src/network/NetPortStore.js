@@ -14,18 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import methodGroups, {
-  allMethods,
-  methodGroupFromMethod
-} from './methodGroups';
+import createMobxStore from '../utils/createMobxStore';
 
-export { methodGroups, allMethods, methodGroupFromMethod };
+const instance = createMobxStore('parity_netPort');
 
-export * from './accounts';
-export * from './dapps';
-export * from './eth';
-export * from './mining';
-export * from './network';
-export * from './node';
-export * from './other';
-export * from './signer';
+export default instance;

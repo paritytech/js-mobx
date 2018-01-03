@@ -23,7 +23,7 @@ export default class SignerStore {
 
   externalLink = '';
 
-  constructor(api, withLocalTransactions = false, externalLink = '') {
+  constructor (api, withLocalTransactions = false, externalLink = '') {
     this._api = api;
     this._timeoutId = 0;
     this.externalLink = externalLink;
@@ -52,13 +52,13 @@ export default class SignerStore {
   };
 
   @action
-  unsubscribe() {
+  unsubscribe () {
     if (this._timeoutId) {
       clearTimeout(this._timeoutId);
     }
   }
 
-  fetchBalance(address) {
+  fetchBalance (address) {
     this._api.eth
       .getBalance(address)
       .then(balance => {
@@ -69,7 +69,7 @@ export default class SignerStore {
       });
   }
 
-  fetchBalances(_addresses) {
+  fetchBalances (_addresses) {
     const addresses = _addresses.filter(address => address) || [];
 
     if (!addresses.length) {
