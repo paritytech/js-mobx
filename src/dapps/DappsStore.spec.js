@@ -60,7 +60,7 @@ test('should make api call when loadApps', () => {
 
   expect.assertions(5);
   return store.loadApps().then(() => {
-    expect(getApps).toHaveBeenCalledWith(false);
+    expect(getApps).toHaveBeenCalledWith(true);
     expect(store.apps).toHaveLength(3);
     expect(store.apps).toContainEqual(mockApps[0]);
     expect(store.apps).toContainEqual(mockApps[1]);
