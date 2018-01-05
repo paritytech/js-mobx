@@ -49,7 +49,7 @@ export default class DappsStore {
 
   loadApps = () =>
     this._api.shell
-      .getApps(false)
+      .getApps(true)
       .then(this.setApps)
       .catch(this.setError);
 }
